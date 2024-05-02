@@ -1,0 +1,19 @@
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+        int len = nums.size();
+        int count = 0;
+        for (int i=0; i <len; i++){
+            int [] uniqueValue = new int[101];
+            int countUnique = 0;
+            for (int j = i; j<len; j++){
+                if (uniqueValue[nums.get(j)] == 0){
+                    countUnique++;
+                    uniqueValue[nums.get(j)]++;
+                }
+                count = count + (countUnique*countUnique);
+
+            }
+        }
+        return count;
+    }
+}
