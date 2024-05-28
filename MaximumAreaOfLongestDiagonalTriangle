@@ -1,0 +1,20 @@
+class Solution {
+    public int areaOfMaxDiagonal(int[][] dimensions) {
+        int max = 0;
+        int res = 0;
+        int l = dimensions.length;
+        for (int i = 0; i < l; i++){
+            int len = dimensions[i][0];
+            int wid = dimensions[i][1];
+            int diag = (len*len + wid*wid);
+            if (diag > max ){
+                max = diag;
+                res = len * wid;
+                }else if (diag == max && len * wid > res){
+                    res = len * wid;
+                }
+        }
+    
+        return res;
+    }
+}
