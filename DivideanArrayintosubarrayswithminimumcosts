@@ -1,0 +1,20 @@
+class Solution {
+    public int minimumCost(int[] nums) {
+        int max_first = Integer.MAX_VALUE, max_second = Integer.MAX_VALUE;
+        int len = nums.length;
+
+        for (int i = 1; i < len ; i++){
+            int current_val = nums[i];
+
+            if (current_val < max_first){
+                max_second = max_first;
+                max_first = current_val;
+                continue;
+            }
+            if (current_val<max_second){
+                max_second=current_val;
+            }
+        }
+        return nums[0]+max_first+max_second;
+    }
+}
