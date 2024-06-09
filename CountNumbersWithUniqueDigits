@@ -1,0 +1,22 @@
+class Solution {
+    public int numberCount(int a, int b) {
+        int count = 0;
+        for (int i = a; i <=b; i++){
+            if (i <= 9){
+                count++;
+            }
+            else if (i<=99 && i%11 != 0){
+                count++;
+            }
+            else if (i <= 999){
+                int first_digit = i/100;
+                int second_digit = (i / 10) % 10;
+                int third_digit = i%10;
+                if (first_digit != second_digit && second_digit != third_digit && first_digit != third_digit){
+                    count ++;
+                } 
+            }
+        }
+        return count;
+    }
+}
