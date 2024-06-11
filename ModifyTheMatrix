@@ -1,0 +1,25 @@
+class Solution {
+    public int[][] modifiedMatrix(int[][] matrix) {
+        int r = matrix.length;
+        int c = matrix[0].length;
+        
+        int [] maxValue = new int [c];
+
+        for(int i = 0; i<c; i++){
+            int max = -1;
+            for (int j = 0; j<r; j++){
+                max = Math.max(max, matrix[j][i]);
+            }
+            maxValue[i] = max;
+        }
+
+        for (int i = 0; i<r; i++){
+            for (int j = 0; j<c; j++){
+                if (matrix[i][j] == -1){
+                    matrix[i][j] = maxValue[j];
+                }
+            }
+        }
+        return matrix;
+    }
+}
