@@ -1,0 +1,22 @@
+/*
+given a string and list of strings
+from the list of string use the first string and verify if its in the given string.
+if so segment the string.
+use the second word from the the list and verify if its the same word,
+if not then from second half of the segmented string verify if the word can be formed.
+if yes, segment the string if not return false.
+ repeat the process for the list of strings.
+ */
+
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        boolean [] dp = new boolean[s.length()+1];
+        dp[0] = true;
+        for (int i = 1;i<=s.length(); i++){
+            for (int j =0;j<i;j++){
+                if(wordDict.contains(s.substring(j,i)) && dp[j]) dp[i] = true;
+            }
+        }
+        return dp[s.length()];
+    }
+}
