@@ -1,0 +1,36 @@
+class Solution {
+    public String[] findWords(String[] words) {
+
+        String firstString = "qwertyuiopQWERTYUIOP";
+        String secondString = "asdfghjklASDFGHJKL";
+        String thirdString = "zxcvbnmZXCVBNM";
+
+        List<String> tlist = new LinkedList<>();
+
+        for(int i =0; i<words.length; i++){
+            if (verify(words[i], firstString) || verify(words[i], secondString) || verify(words[i], thirdString)) {
+                tlist.add(words[i]);        
+            }
+        }
+        String [] res = new String[tlist.size()];
+        for(int i = 0; i <tlist.size(); i++){
+            res[i] = tlist.get(i);
+        }return res;
+    }
+    public boolean verify(String given, String original){
+            boolean temp = true;
+            for(char givenCH : given.toCharArray()){
+                boolean isTrue = false;
+                for(char originalCH : original.toCharArray()){
+                    if (givenCH == originalCH){
+                        isTrue = true;
+                        break;
+                    }
+                }
+                if(!isTrue){
+                    return false;
+                }
+            }
+            return temp;
+        }
+}
