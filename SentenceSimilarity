@@ -1,0 +1,50 @@
+/*
+Given two sentences, compare the pairs that are equivalent to given set of similar pairs
+check for the length of sentences if its lesser than the other array of sentence then its false.
+check if all the words are equivalent to that of given similar words.
+
+
+create an array to save two words, words being first word of the sentence1 and second word being the first word of the sentence2.
+compare the newly created array with the one in similar words list if they are equivalent continue to next iterations else break and return false.
+
+
+*/
+
+class Solution {
+    public boolean areSentencesSimilar(String[] sentence1, String[] sentence2, List<List<String>> similarPairs) {
+
+        // boolean result = true;
+        // if (sentence1.length != sentence2.length){return false;}
+
+        // for (int i=0; i<sentence1.length; i++){
+        //     if(!sentence1[i].equals(sentence2[i])){
+        //         if(!similarPairs.contains(List.of(sentence1[i],sentence2[i])) && (!similarPairs.contains(List.of(sentence2[i],sentence1[i])))){
+        //             result =false;
+        //             break;
+        //         }
+        //     }
+        // }
+        // return result;
+
+        if (sentence1.length != sentence2.length){return false;}
+
+        Map<String, Set<String>> mp = new HashMap<>();
+        for (List <String> pairs: similarPairs){
+            mp.putIfAbsent(pairs.get(0), new HashSet<String>());
+            mp.putIfAbsent(pairs.get(1), new HashSet<String>());
+            mp.get(pairs.get(0)).add(pairs.get(1));
+            mp.get(pairs.get(1)).add(pairs.get(0));
+        }
+
+        for(int i = 0; i<sentence1.length; i++){
+            if (sentence1[i].equals(sentence2[i])){continue ;}
+            if (!mp.containsKey(sentence1[i])) return false;
+            if(!mp.get(sentence1[i]).contains(sentence2[i])) return false;
+        }
+        return true;
+    }
+     
+}
+
+
+
