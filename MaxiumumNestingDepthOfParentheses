@@ -1,0 +1,18 @@
+class Solution {
+    public int maxDepth(String s) {
+        Deque<Character> st = new ArrayDeque<>();
+        int res = 0;
+
+        for(char ch : s.toCharArray()){
+            if (ch == '(' || ch == ')'){
+                if(ch =='('){
+                    st.push('(');
+                    res = Math.max(res, st.size());
+                }else{
+                    st.pop();
+                }
+            }
+        }
+        return res;
+    }
+}
