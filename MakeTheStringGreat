@@ -1,0 +1,21 @@
+class Solution {
+    public String makeGood(String s) {
+        ArrayDeque<Character> st = new ArrayDeque<>();
+
+        for(Character ch : s.toCharArray()){
+            if (st.isEmpty()){
+                st.push(ch);
+            }
+            else if((Character.isUpperCase(st.peek()) != Character.isUpperCase(ch)) && (Math.abs(st.peek() - ch) ==32)){
+                st.pop();
+            }else{
+                st.push(ch);
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        while (!st.isEmpty()) {
+            sb.append(st.pop());
+        }
+        return sb.reverse().toString();
+    }
+}
