@@ -1,0 +1,32 @@
+class Solution {
+    public int twoSumLessThanK(int[] nums, int k) {
+        Arrays.sort(nums);
+        int sum =-1;
+
+        for(int i=0; i< nums.length-1;i++){
+            int target = k - nums[i];
+            int j = binarySearch(nums, i+1, nums.length-1, target);
+            if(j!=-1){
+                sum = Math.max(sum, nums[i]+nums[j]);
+            }
+        }
+        return sum;
+    }
+    private int binarySearch(int [] nums, int left, int right, int target){
+        while(left<right-1){
+            int mid = left+(right-left)/2;
+            if(nums[mid] < target){
+                left = mid;
+            }else {
+                right = mid;
+            }
+        }
+        if(nums[right]< target){
+            return right;
+        }
+        if(nums[left]<target){
+            return left;
+        }
+        return -1;
+    }
+}
