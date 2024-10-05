@@ -1,0 +1,57 @@
+
+
+import com.sun.source.tree.Tree;
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode sortedArrayToBST(int[] nums) {
+
+        if(nums.length == 0){
+            return null;
+        }
+
+        TreeNode result = new TreeNode(0);
+        Stack<TreeNode> stack = new Stack<>();
+        Stack<int[]> index = new Stack<>();
+
+        stack.push(result);
+        index.push(new int[]{0, nums.length-1});
+
+        while(!stack.isEmpty()){
+            TreeNode node = stack.pop();
+            int [] indices = index.pop();
+            int left = indices[0], right = indices[1];
+
+            if(left>right){continue;}
+
+            int mid = left + (right -left)/2;
+            node.val = nums[mid];
+
+            if(right>= mid+1){
+                node.right = new TreeNode(0);
+                stack.push(node.right);
+                index.push(new int[] {mid+1, right});
+            }
+            if(left<=mid-1){
+                node.left = new TreeNode(0);
+                stack.push(node.left);
+                index.push(new int[]{left, mid -1});
+            }
+        }
+        return result;
+    }
+}
