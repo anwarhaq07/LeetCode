@@ -1,0 +1,12 @@
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int [] num = new int[nums.length];
+        int ind = 0;
+        for(int n : nums){
+            if(n!=0){
+                num[ind++] = n;
+            }
+        }
+        System.arraycopy(num, 0, nums, 0, nums.length);
+    }
+}
