@@ -1,0 +1,40 @@
+class Solution {
+    public int maximumProduct(int[] nums) {
+        int len = nums.length;
+        int Hnum1 = Integer.MIN_VALUE;
+        int Hnum2 = Integer.MIN_VALUE;
+        int Hnum3 = Integer.MIN_VALUE;
+        int Lnum4 = Integer.MAX_VALUE;
+        int Lnum5 = Integer.MAX_VALUE;
+
+
+        for(int i=0; i<len; i++){
+            if(nums[i]>=Hnum1){
+                if(nums[i]>=Hnum2){
+                    if(nums[i]>=Hnum3){
+                        Hnum1 = Hnum2;
+                        Hnum2 = Hnum3;
+                        Hnum3 = nums[i];
+                    }else{
+                        Hnum1 =Hnum2;
+                        Hnum2 = nums[i];
+                    }
+                }else{
+                    Hnum1=nums[i];
+                }
+            }
+            if(nums[i]<=Lnum4){
+                    if (nums[i]<=Lnum5) 
+                    {
+                        Lnum4 = Lnum5;
+                        Lnum5 = nums[i];
+                    }else{
+                        Lnum4 = nums[i];
+                    }
+                }
+        }
+        int prod1 = Hnum1*Hnum2*Hnum3;
+        int prod2 = Hnum3*Lnum4*Lnum5;
+        return Math.max(prod1, prod2);
+    }
+}
