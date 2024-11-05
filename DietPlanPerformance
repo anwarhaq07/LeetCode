@@ -1,0 +1,28 @@
+class Solution {
+    public int dietPlanPerformance(int[] calories, int k, int lower, int upper) {
+        int dieter = 0;
+        int len = calories.length;
+        int sum = 0;
+        int start = 0;
+
+        for (int end = 0; end<len; end++){
+            sum = sum + calories[end];
+
+            if(end<k-1){
+                continue;
+            }
+
+            if(end>k-1){
+                sum = sum -calories[start];
+                start++;
+            }
+
+            if(sum <lower){
+                dieter = dieter-1;
+            }else if(sum>upper){
+                dieter = dieter+1;
+            }
+        }
+        return dieter;
+    }
+}
