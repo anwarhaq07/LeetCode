@@ -1,0 +1,14 @@
+class Solution:
+    def checkValid(self, matrix: List[List[int]]) -> bool:
+        n = len(matrix)
+        expected_matrix = set(range(1,n+1))
+
+        for row in matrix:
+            if expected_matrix != set(row):
+                return False
+
+        for col in range(n):
+            column_set = {matrix[row][col] for row in range(n)}
+            if column_set != expected_matrix:
+                return False
+        return True

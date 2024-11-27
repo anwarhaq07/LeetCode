@@ -1,0 +1,16 @@
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        
+        #Add counter to track time
+        counter = 0
+
+        #Iterate through the array of numbers
+        for i in range(len(tickets)):
+
+            # if index i is less than given index k, add minimum of two index values
+            if i<=k:
+                counter += min(tickets[i], tickets[k])
+            # if i > k add miniumu of i and [k] -1
+            else:
+                counter += min(tickets[i], tickets[k]-1)
+        return counter

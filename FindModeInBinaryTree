@@ -1,0 +1,41 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findMode(self, root: Optional[TreeNode]) -> List[int]:
+        #Save key value pairs
+        my_dict = {}
+        
+        #Helper function
+        def mode(node):
+            
+            #If there is no node return empty list
+            if not node:
+                return []
+            
+            #Check if the value exist  
+            # in the dict, increment key if there is else add a new value
+            if node.val in my_dict:
+                my_dict[node.val] +=1
+            else:
+                my_dict[node.val] = 1
+
+            #Recurse through left and right nodes
+            mode(node.left)
+            mode(node.right)
+
+        mode(root)
+        
+        #get the highest duplicate count 
+        max_count = max(my_dict.values())
+
+        #Use list to save all the items with max count
+        result = [k for k, v in my_dict.items() if v == max_count]
+        
+        #return result
+        return result
+
+
