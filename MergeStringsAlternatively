@@ -1,0 +1,22 @@
+class Solution:
+    def mergeAlternately(self, word1: str, word2: str) -> str:
+        
+        #declare empty string for result
+        output = ""
+
+        #Using the word with least length to iterate
+        min_length = min(len(word1), len(word2))
+
+        #iterate through the minimum length word
+        for char in range(min_length):
+            output += word1[char]+word2[char]
+        
+        #Condition to add the rest of characters from max length
+        if min_length<len(word1):
+            output+=word1[min_length:]
+        
+        if min_length<len(word2):
+            output+=word2[min_length:]
+
+        #return result
+        return output   
