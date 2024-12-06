@@ -1,0 +1,30 @@
+class Solution:
+    def minimumJumps(self, forbidden: List[int], a: int, b: int, x: int) -> int:
+        
+        #Save forbidden list in set  for quick lookups
+        restricted = set(forbidden)
+        #Maximum number a target can lie in
+        limit = max(x, max(forbidden, default = 0))+a+b
+        #BFS initialization, where values queued are Position, Jumps and can_jump_back flag
+        queue = deque([(0, 0, True)])
+        #Nodes visited have to be marked, Position visited and can_jump_back
+        visited = set([(0, True)])
+
+        #Loop through queue
+        while queue:
+            position, jumps, can_jump_back = queue.popleft()
+            if position == x:
+                return jumps
+            
+            #if position is not equal to target we move forward as it starts with 0
+            forward = position + a
+            if forward <= limit and forward not in restricted and (forward, True) not in visited:
+                visited.add((forward, True))
+                queue.append((forward, jumps+1, True))
+            
+            #if position is greater than limit
+            backward = position - b
+            if can_jump_back == True and backward not in restricted and backward >= 0 and (backward, False) not in visited:
+                visited.add((backward, False))
+                queue.append((backward, jumps+1, False))
+        return -1
