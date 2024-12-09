@@ -1,0 +1,35 @@
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        #Sort list in non descending order
+        nums.sort()
+
+        #Loop through the range of length of sorted nums
+        for i in range(len(nums)-1):
+            if nums[i] == nums[i+1]:
+                return True
+        return False
+
+*********************************************************************
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
+
+        for num in nums:
+            if num in seen:
+                return True
+            seen.add(num)
+        return False
+*********************************************************************
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        num_count = {}
+
+        for num in nums:
+            if num in num_count:
+                return True
+            num_count[num] = 1
+        return False
+**********************************************************************
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        return len(set(nums))!=len(nums)

@@ -1,0 +1,27 @@
+class Solution:
+    def reachableNodes(self, n: int, edges: List[List[int]], restricted: List[int]) -> int:
+        
+        #Convert edges to Graph format for better traversal
+        graph = defaultdict(list)
+        for u,v in edges:
+            graph[u].append(v)
+            graph[v].append(u)
+        
+        #use SET as restricted list for quick lookups
+        rest_list = set(restricted)
+
+        #BFS initialization
+        #queue is initialised with 0, as 0 is the initial node and is never restricted
+        queue = deque([0])
+        visited = set([0])
+        count = 0
+
+        while queue:
+            node = queue.popleft()
+            count+=1
+
+            for neighbor in graph[node]:
+                if neighbor not in visited and neighbor not in rest_list:
+                    visited.add(neighbor)
+                    queue.append(neighbor)
+        return count
