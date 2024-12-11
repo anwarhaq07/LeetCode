@@ -16,3 +16,28 @@ class Solution:
             inorder_traversal(node.left)
         inorder_traversal(root)
         return root
+*******************************************************************************
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def bstToGst(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        
+        stack = []
+        current = root
+        self.sum = 0
+
+        while stack or current:
+
+            while current:
+                stack.append(current)
+                current = current.right
+            current = stack.pop()
+            self.sum += current.val
+            current.val = self.sum
+
+            current = current.left
+        return root
