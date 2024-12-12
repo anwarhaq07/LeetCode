@@ -1,0 +1,21 @@
+class Solution:
+    def verifyPreorder(self, preorder: List[int]) -> bool:
+        
+        #Use stack to keep track of ancestors
+        stack = []
+        #use variable to store last_val, assign the lowest possible value to begin with
+        last_val = float('-inf')
+
+        #Loop through the given array
+        for val in preorder:
+            #verify if val is lower than last_val
+            if val<last_val:
+                return False
+            
+            #base condition to check if stack is empty and last appended stack value
+            #is greater than new value
+            while stack and val>stack[-1]:
+                #use the last stack val as a new root as we are moving towards right node
+                last_val = stack.pop()
+            stack.append(val)
+        return True
