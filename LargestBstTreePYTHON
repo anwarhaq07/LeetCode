@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def largestBSTSubtree(self, root: Optional[TreeNode]) -> int:
+        self.max_bst_subtree = 0
+
+        def helper(node):
+            if not node:
+                return True, 0, float('inf'), float('-inf')
+            is_left_bst, left_size, left_min, left_max = helper(node.left)
+            is_right_bst, right_size, right_min, right_max = helper(node.right)
+
+            if is_left_bst and is_right_bst and left_max < node.val < right_min:
+                size = left_size + right_size + 1
+                self.max_bst_subtree = max(size, self.max_bst_subtree)
+                return True, size, min(left_min, node.val), max(right_max, node.val)
+            else:
+                return False, 0,0,0
+        
+        helper(root)
+        return self.max_bst_subtree

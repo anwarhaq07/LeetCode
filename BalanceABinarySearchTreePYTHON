@@ -1,0 +1,29 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def balanceBST(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        #As it is a Binary Search Tree one of the propety of BST,
+        #It can be sorted tree if we do inorder Traversal
+
+        #Inorder Traversal: starting from leftNode-->Node-->RightNode
+        def inorder_trav(node):
+            if not node:
+                return[]
+            return inorder_trav(node.left) + [node.val] +inorder_trav(node.right)
+        sorted_root = inorder_trav(root)
+
+        #Now we have a sorted array, lets build a balanced binary tree
+        # for the balanced binary lets take mid point as root
+        def bst(left, right):
+            if left>right:
+                return None
+            mid = (left + right) //2
+            new_node = TreeNode(sorted_root[mid])
+            new_node.left = bst(left, mid-1)
+            new_node.right = bst(mid+1,right)
+            return new_node
+        return bst(0, len(sorted_root)-1)
