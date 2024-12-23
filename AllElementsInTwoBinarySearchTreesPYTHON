@@ -1,0 +1,48 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getAllElements(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> List[int]:
+        def helper(node):
+            if not node:
+                return []
+            return helper(node.left) + [node.val] + helper(node.right)
+        list1 = helper(root1)
+        list2 = helper(root2)
+
+        merged = []
+        i,j = 0,0
+
+        while i<len(list1) and j<len(list2):
+            if list1[i] < list2[j]:
+                merged.append(list1[i])
+                i+=1
+            else:
+                merged.append(list2[j])
+                j+=1
+        merged.extend(list1[i:])
+        merged.extend(list2[j:])
+        return merged
+**********************************************************************************************************
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+        def helper(self, node, l):
+            if not node:
+                return
+            self.helper(node.left, l)
+            l.append(node.val)
+            self.helper(node.right, l)
+            return l
+        def getAllElements(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> List[int]:
+            list1 = []
+            self.helper(root1, list1)
+            self.helper(root2, list1)
+            return sorted(list1)
