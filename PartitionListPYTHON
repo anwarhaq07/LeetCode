@@ -1,0 +1,64 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        #Using Two lists, one for greater values than x and one for lower values\
+        larger = ListNode(0)
+        smaller = ListNode(0)
+
+        large = larger
+        small = smaller
+
+        while head:
+            if head.val < x:
+                small.next = head
+                small = small.next
+            else:
+                large.next = head
+                large = large.next
+            head = head.next
+        large.next = None
+        small.next = larger.next
+        return smaller.next
+***************************************************************************************************
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def partition(self, head: Optional[ListNode], x: int) -> Optional[ListNode]:
+        if not head or not head.next:
+            return head
+        
+        less_start = less_end = None
+        greater_start = greater_end = None
+
+        current = head
+
+        while current:
+            if current.val < x:
+                if not less_start:
+                    less_start = less_end = current
+                else:
+                    less_end.next = current
+                    less_end = current
+            else:
+                if not greater_start:
+                    greater_start = greater_end = current
+                else:
+                    greater_end.next = current
+                    greater_end = current
+            current = current.next
+        
+        if not less_start:
+            return greater_start
+        
+        less_end.next = greater_start
+
+        if greater_end:
+            greater_end.next = None
+        return less_start
