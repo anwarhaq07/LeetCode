@@ -1,0 +1,102 @@
+************************************Time Resrticted Solution, Wouldn't work large data sets*********************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: bool
+        """
+        if not head:
+            return False
+        new_head = copy.deepcopy(head)
+        prev = None
+        current = new_head
+
+        while current:
+            temp = current.next
+            current.next = prev
+            prev = current
+            current = temp
+        new_head = prev
+
+        while head:
+            if head.val != new_head.val:
+                return False
+            head = head.next
+            new_head = new_head.next
+        return True
+************************************************************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: bool
+        """
+        if not head:
+            return False
+
+        current = head
+        new_head = copy.deepcopy(head)
+        count = 0
+
+        while(current):
+            current = current.next
+            count += 1
+        mid = float((count)/2)
+        mid = math.floor(mid)
+
+        while mid:
+            new_head = new_head.next
+            mid -= 1
+        
+        prev = None
+        new_current = new_head
+        while new_current:
+            temp = new_current.next
+            new_current.next = prev
+            prev = new_current
+            new_current = temp
+        new_head = prev
+
+        while new_head:
+            if new_head.val != head.val:
+                return False
+            new_head = new_head.next
+            head = head.next
+        return True
+    *********************************************************************************************************************
+    # Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def isPalindrome(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: bool
+        """
+        if not head:
+            return None
+
+        stack = []
+        current = head
+
+        while current:
+            stack.append(current.val)
+            current = current.next
+
+        while stack:
+            if head.val != stack.pop():
+                return False
+            head = head.next
+        return True     
