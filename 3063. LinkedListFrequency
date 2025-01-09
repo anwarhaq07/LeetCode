@@ -1,0 +1,29 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def frequenciesOfElements(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: Optional[ListNode]
+        """
+        if not head:
+            return head
+        my_dict = {}
+
+        while head:
+            num = head.val
+            if num in my_dict:
+                my_dict[num] += 1
+            else:
+                my_dict[num] = 1
+            head = head.next
+        current = ListNode()
+        head = current
+        for key in my_dict:
+            value = my_dict.get(key)
+            head.next = ListNode(value)
+            head = head.next
+        return current.next
