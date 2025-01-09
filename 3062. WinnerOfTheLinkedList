@@ -1,0 +1,60 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def gameResult(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: str
+        """
+        even_num = head
+        odd_num = even_num.next
+
+        even = 0
+        odd = 0
+
+        while even_num and odd_num:
+            if even_num.val > odd_num.val:
+                even += 1
+            else:
+                odd += 1
+            even_num = odd_num.next
+            if even_num != None:
+                odd_num = even_num.next
+        if even > odd:
+            return "Even"
+        elif odd > even:
+            return "Odd"
+        else:
+            return "Tie"
+  **********************************SMALL CORRECTION****************************************************************
+  # Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def gameResult(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: str
+        """
+        node = head
+
+        even = 0
+        odd = 0
+
+        while node:
+            if node.val > node.next.val:
+                even += 1
+            else:
+                odd += 1
+            node = node.next.next
+        if even > odd:
+            return "Even"
+        elif odd > even:
+            return "Odd"
+        else:
+            return "Tie"
