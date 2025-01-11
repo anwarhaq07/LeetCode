@@ -1,0 +1,56 @@
+**************************Without A Constraint*****************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reorderList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: None Do not return anything, modify head in-place instead.
+        """
+        arr = []
+        while head:
+            arr.append(head.val)
+            head = head.next
+        
+        dummy = ListNode(0)
+        current = dummy
+        j = len(arr)-1
+        for i in range(len(arr)):
+            if i < j:
+                current.next = ListNode(arr[i])
+                current = current.next
+                current.next = ListNode(arr[j])
+                current = current.next
+                i += 1
+                j -= 1
+        return dummy.next
+*******************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reorderList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: None Do not return anything, modify head in-place instead.
+        """
+        arr = []
+        current = head
+        while current:
+            arr.append(current)
+            current = current.next
+        
+        i = 0
+        j = len(arr)-1
+        while i < j:
+            arr[i].next = arr[j]
+            i += 1
+            if i < j:
+                arr[j].next = arr[i]
+                j -= 1
+        arr[i].next = None
