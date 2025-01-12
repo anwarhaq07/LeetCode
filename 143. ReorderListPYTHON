@@ -54,3 +54,40 @@ class Solution(object):
                 arr[j].next = arr[i]
                 j -= 1
         arr[i].next = None
+************************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reorderList(self, head):
+        """
+        :type head: Optional[ListNode]
+        :rtype: None Do not return anything, modify head in-place instead.
+        """
+        if not head:
+            return head
+        arr = []
+        dummy = head
+
+        while dummy:
+            arr.append(dummy.val)
+            dummy = dummy.next
+
+        i = 0
+        j = len(arr)-1
+        length = len(arr)
+        current = head
+        while length:
+                current.val = arr[i]
+                current = current.next
+                i += 1
+                length -= 1
+                if length == 0:
+                    break
+                current.val = arr[j]
+                current = current.next
+                j -= 1 
+                length -=1
+        return head
