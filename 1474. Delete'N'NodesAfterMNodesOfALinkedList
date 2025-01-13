@@ -1,0 +1,67 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def deleteNodes(self, head, m, n):
+        """
+        :type head: Optional[ListNode]
+        :type m: int
+        :type n: int
+        :rtype: Optional[ListNode]
+        """
+        if not head:
+            return None
+        
+        current = head
+
+        while current:
+            count = 1
+            while count < m and current != None:
+                current = current.next
+                count += 1
+            prev = current
+            if current != None:
+                current = current.next
+            else:
+                break
+            count = 1
+            while count <= n and current != None:
+                current = current.next
+                count += 1
+            prev.next = current
+        return head
+************************************************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def deleteNodes(self, head, m, n):
+        """
+        :type head: Optional[ListNode]
+        :type m: int
+        :type n: int
+        :rtype: Optional[ListNode]
+        """
+        if not head:
+            return None
+        
+        current = head
+
+        while current:
+            count = 1
+            while count < m and current != None:
+                current = current.next
+                count += 1
+            prev = current
+            if current != None:
+                current = current.next
+                count = 1
+                while count <= n and current != None:
+                    current = current.next
+                    count += 1
+                prev.next = current
+        return head
