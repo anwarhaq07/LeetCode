@@ -1,0 +1,28 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def plusOne(self, head):
+        """
+        :type head: ListNode
+        :rtype: ListNode
+        """
+        new_str = ""
+        str_head = head
+
+        while str_head:
+            new_str += str(str_head.val)
+            str_head = str_head.next
+        
+        new_int = str(int(new_str)+1)
+
+        new_list = ListNode(0)
+        dummy = new_list
+
+        for digit in new_int:
+            dummy.next = ListNode(int(digit))
+            dummy = dummy.next
+        return new_list.next
+*************************************************************************************
