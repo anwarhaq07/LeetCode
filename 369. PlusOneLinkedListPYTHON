@@ -26,3 +26,41 @@ class Solution(object):
             dummy = dummy.next
         return new_list.next
 *************************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def reverse(self, head):
+
+        prev = None
+        while head:
+            next_node = head.next
+            head.next = prev
+            prev = head
+            head = next_node
+        return prev
+    
+    def plusOne(self, head):
+
+        head = self.reverse(head)
+        carry = 1
+
+        current = head
+
+        while current:
+            current.val += carry
+
+            if current.val < 10:
+                carry = 0
+                break
+            else:
+                current.val = 0
+                carry = 1
+            if not current.next and carry:
+                current.next = ListNode(1)
+                carry = 0
+            current = current.next
+
+        return self.reverse(head)
