@@ -1,0 +1,14 @@
+class Solution(object):
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        count_dict = {}
+        count = 0
+
+        for num in nums:
+            count_dict[num] = count_dict.get(num, 0)+1
+            if count_dict.get(num) > 1:
+                return True
+        return False
