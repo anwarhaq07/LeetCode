@@ -1,0 +1,65 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def swapNodes(self, head, k):
+        """
+        :type head: Optional[ListNode]
+        :type k: int
+        :rtype: Optional[ListNode]
+        """
+        if not head or not head.next:
+            return head
+        
+        current = head
+        count = 0
+        arr_val = []
+
+        while current:
+            arr_val.append(current.val)
+            current = current.next
+        length = len(arr_val)
+        temp1_val = arr_val[k-1]
+        temp2_val = arr_val[length - k]
+        arr_val[k - 1] = temp2_val
+        arr_val[length - k] = temp1_val
+
+        new_head = ListNode(arr_val[0])
+        current = new_head
+        for val in arr_val[1:]:
+            current.next = ListNode(val)
+            current = current.next
+        return new_head
+*********************************************************************************************************
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution(object):
+    def swapNodes(self, head, k):
+        """
+        :type head: Optional[ListNode]
+        :type k: int
+        :rtype: Optional[ListNode]
+        """
+        if not head or not head.next:
+            return head
+        
+        first = last = head
+
+        for _ in range(k-1):
+            first = first.next
+        
+        temp = first
+        last = head
+
+        while temp.next:
+            temp = temp.next
+            last = last.next
+        
+        first.val, last.val = last.val, first.val
+
+        return head
