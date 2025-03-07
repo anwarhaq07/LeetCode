@@ -8,7 +8,7 @@ class Solution(object):
         res = []
 
         for i in range(len(nums)):
-            diff = abs(target - nums[i])
+            diff = target - nums[i]
             for j in range(i+1, len(nums)):
                 if diff == nums[j]:
                     res.append(i)
