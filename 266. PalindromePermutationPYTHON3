@@ -1,0 +1,32 @@
+class Solution:
+    def canPermutePalindrome(self, s: str) -> bool:
+        
+        length = len(s)
+        my_dict = {}
+        count = 0
+
+        for index,char in enumerate(s):
+
+            if char in my_dict:
+                my_dict[char] += 1
+            else:
+                my_dict[char] = 1
+        
+        if length % 2 == 1:
+            for key, value in my_dict.items():
+                if value % 2 == 0:
+                    continue
+                else:
+                    count += 1
+            if count > 1:
+                return False
+            else:
+                return True
+        else:
+
+            for key, value in my_dict.items():
+                if value % 2 == 0:
+                    continue
+                else:
+                    return False
+        return True
