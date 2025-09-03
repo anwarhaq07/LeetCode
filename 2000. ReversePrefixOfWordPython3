@@ -1,0 +1,19 @@
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        
+        result = ""
+        stack = []
+        dummy = word
+
+        for char in word:
+            stack.append(char)
+            dummy = dummy[1:]
+
+            if char == ch:
+                while stack:
+                    result += stack.pop()
+                result += dummy
+                return result
+        
+        result += word
+        return result
