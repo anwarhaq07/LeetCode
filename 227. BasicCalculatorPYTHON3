@@ -1,0 +1,57 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        stack = []
+        parts = re.split(r'(\D)',s)
+        parts = [p for p in parts if p.strip()]
+        result = 0
+        i = 0
+
+        for _ in range(len(parts)):
+            if i >= len(parts):
+                break
+            if parts[i] == "*" or parts[i] == "/":
+                first_element = int(stack.pop())
+                operator = parts[i]
+                second_element = int(parts[i+1])
+                if operator == "*":
+                    result = second_element * first_element
+                else:
+                    result = int(first_element / second_element)
+                stack.append(result)
+                del parts[i+1]
+                i += 1
+                
+            else:
+                stack.append(parts[i])
+                i+=1
+        
+        # while stack:
+        #     if len(stack) == 1:
+        #         return int(stack.pop())
+            
+        #     first_el = int(stack.pop())
+        #     opera = stack.pop()
+        #     second_el = int(stack.pop())
+            
+        #     if opera == "+":
+        #         result = second_el + first_el
+        #     else:
+        #         result = second_el - first_el
+        #     stack.append(result)
+        result_stack = []
+        i = 0
+        while i < len(stack):
+            token = str(stack[i]) 
+            if token.isdigit():
+                result_stack.append(int(token))
+            else:
+                op = token
+                a = result_stack.pop()
+                b = int(stack[i+1])
+                if op == "+":
+                    result_stack.append(a + b)
+                else:
+                    result_stack.append(a - b)
+                i += 1  # skip next number
+            i += 1
+        return result_stack.pop()
