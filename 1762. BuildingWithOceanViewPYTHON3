@@ -1,0 +1,22 @@
+class Solution:
+    def findBuildings(self, heights: List[int]) -> List[int]:
+        stack = []
+        index = []
+        max_height = 0
+
+        i = 0
+
+        while i < len(heights):
+            if heights[i] > max_height:
+                max_height = heights[i]
+            while stack:
+                if stack[-1] <= heights[i]:
+                    stack.pop()
+                    index = index[:-1]
+                else:
+                    break
+            
+            stack.append(heights[i])
+            index.append(i)
+            i += 1
+        return index
