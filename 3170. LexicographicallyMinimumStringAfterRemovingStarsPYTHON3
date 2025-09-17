@@ -1,0 +1,25 @@
+class Solution:
+    def clearStars(self, s: str) -> str:
+        stack = []
+        str_bucket = [[] for _ in range(26)]
+
+        i = 0
+
+        for i, ch in enumerate(s):
+            if ch.isalpha():
+                index = ord(ch) - ord('a')
+                stack.append((ch, index))
+                str_bucket[index].append(len(stack)-1)
+                
+            else:
+                for idx in range(26):
+                    if str_bucket[idx]:
+                        pos = str_bucket[idx].pop()
+                        stack[pos] = None
+                        break
+        
+        result = []
+        for item in stack:
+            if item is not None:
+                result.append(item[0])
+        return "".join(result)
