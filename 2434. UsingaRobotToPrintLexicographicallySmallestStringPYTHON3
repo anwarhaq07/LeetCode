@@ -1,0 +1,28 @@
+class Solution:
+    def robotWithString(self, s: str) -> str:
+        t = []
+        min_char = ""
+        result = ""
+        str_arr = [0]*26
+
+        # save the count of letters in the string array and hold the smallest letter in min_char
+        for _,ch in enumerate(s):
+            idx = ord(ch) - ord('a')
+            str_arr[idx] += 1
+            if min_char == "" or idx < ord(min_char) - ord('a'):
+                min_char = ch
+
+        for _,ch in enumerate(s):
+            t.append(ch)
+            str_arr[ord(ch) - ord('a')] -= 1
+            if str_arr[ord(min_char) - ord('a')] == 0:
+                for i in range(ord(min_char) - ord('a') + 1, 26):
+                    if str_arr[i] > 0:
+                        n = i+ord('a')
+                        min_char = chr(n)
+                        break
+                    else:
+                        min_char = '{'
+            while t and t[-1] <= min_char:
+                    result += t.pop()
+        return result    
