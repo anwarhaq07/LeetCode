@@ -1,0 +1,29 @@
+class Solution:
+    def sumSubarrayMins(self, arr: List[int]) -> int:
+        left_span = 0
+        right_span = 0
+        result = 0
+        stack = []
+        MOD = 10**9 +7
+
+        i = 0
+
+        while i < len(arr):
+            if stack:
+                while stack and arr[stack[-1]] > arr[i]:
+                    min_index = stack.pop()
+                    left_index = stack[-1] if stack else -1
+                    right_span = i - min_index
+                    left_span = min_index - left_index
+                    result += arr[min_index]*left_span*right_span
+            
+            stack.append(i)
+            i+=1
+        while stack:
+            min_index = stack.pop()
+            left_index = stack[-1] if stack else -1
+            right_span = len(arr) - min_index
+            left_span = min_index - left_index
+            result += arr[min_index] * left_span * right_span
+
+        return result % MOD
