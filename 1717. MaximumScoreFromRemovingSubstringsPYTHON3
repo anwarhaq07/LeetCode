@@ -1,0 +1,89 @@
+class Solution:
+    def maximumGain(self, s: str, x: int, y: int) -> int:
+
+        if x > y:
+            return self.processXfirst(s,x,y) 
+        else:
+            return self.processYfirst(s,x,y)
+
+    
+    def processXfirst(self, st:str, x:int, y:int) -> int:
+        stack = []
+        i = 0
+        result = 0
+        countA = 0
+        countB = 0
+        
+
+        while i<len(st):
+            if st[i] == 'a':
+                stack.append(st[i])
+            elif st[i] == 'b':
+                if stack and stack [-1] == 'a':
+                    stack.pop()
+                    result += x
+                else:
+                    stack.append(st[i])
+            else:
+                while stack:
+                    if stack [-1] == 'a':
+                        countA += 1
+                        stack.pop()
+                    else:
+                        countB += 1
+                        stack.pop()
+                if countA > 0 and countB > 0:
+                    result += min(countA, countB) * y
+                countA, countB = 0,0   
+            i+=1
+        countA, countB = 0, 0    
+        while stack:
+
+            char = stack.pop()
+            if char == 'a':
+                countA += 1
+            else:
+                countB += 1
+        if countA > 0 and countB > 0:
+            result += min(countA, countB) * y
+        return result
+   
+    def processYfirst(self, st:str, x:int, y:int) -> int:
+        stack = []
+        i = 0
+        result = 0
+        countA = 0
+        countB = 0
+
+        while i<len(st):
+            if st[i] == 'b':
+                stack.append(st[i])
+            elif st[i] == 'a':
+                if stack and stack[-1] == 'b':
+                    stack.pop()
+                    result += y
+                else:
+                    stack.append(st[i])
+            else:
+                while stack:
+                    if stack[-1] == 'b':
+                        countA +=1
+                        stack.pop()
+                    else:
+                        countB += 1
+                        stack.pop()
+                if countA> 0 and countB>0:
+                    result += min(countA, countB) * x
+                countA, countB = 0, 0
+            i+=1
+        countA, countB = 0, 0    
+        while stack:
+            
+            char = stack.pop()
+            if char == 'a':
+                countA +=1
+            else:
+                countB += 1
+        if countA> 0 and countB>0: 
+            result += min(countA, countB) * x
+        return result
