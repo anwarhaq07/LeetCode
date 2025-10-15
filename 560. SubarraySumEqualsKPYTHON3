@@ -1,0 +1,14 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        sum = 0
+        mydict = {0:1}
+        count = 0
+
+        for i in range(len(nums)):
+            sum = nums[i] + sum
+            diff = sum - k
+            if diff in mydict:
+                count += mydict[diff]
+        
+            mydict[sum] = mydict.get(sum, 0) + 1
+        return count
