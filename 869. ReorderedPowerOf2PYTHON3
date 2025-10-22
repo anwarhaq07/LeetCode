@@ -1,0 +1,14 @@
+class Solution:
+    def reorderedPowerOf2(self, n: int) -> bool:
+        powers = set()
+
+        for i in range(31):
+            num = 2**i
+            signature = "".join(sorted(str(num)))
+            powers.add(signature)
+
+        n_str = "".join(sorted(str(n)))
+
+        if n_str in powers:
+            return True
+        return False
