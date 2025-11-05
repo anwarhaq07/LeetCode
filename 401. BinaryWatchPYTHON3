@@ -1,0 +1,39 @@
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
+        hours = [8,4,2,1]
+        minutes = [32,16,8,4,2,1]
+        result = []
+        def validHour(start_index, total_hour, light_count, h_needed):
+            if light_count == h_needed:
+                if total_hour < 12:
+                    return [total_hour]
+                return []
+            result = []
+            for i in range(start_index, len(hours)):
+                result += validHour(i+1, total_hour + hours[i], light_count+1, h_needed)
+            return result
+        if turnedOn<=4:        
+            validHour(0, 0, 0, turnedOn)
+
+        def validminutes(start_index, total_minutes, light_count, h_needed):
+            if light_count == h_needed:
+                if total_minutes < 60:
+                    return [total_minutes]
+                return []
+            result = []
+            for i in range(start_index, len(minutes)):
+                result += validminutes(i+1, total_minutes+minutes[i], light_count+1, h_needed)
+            return result
+        if turnedOn<=6:
+            validminutes(0, 0, 0, turnedOn)
+        
+        for h in range(0, min(4, turnedOn) + 1):
+            m = turnedOn-h
+            if m <= 6:
+                combine_hour = validHour(0,0,0,h)
+                combine_minute = validminutes(0,0,0,m)
+                for hr in combine_hour:
+                    for mn in combine_minute:
+                        result.append(f"{hr}:{mn:02}")
+        return result
+        
