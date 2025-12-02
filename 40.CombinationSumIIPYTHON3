@@ -1,0 +1,26 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        result = []
+        candidates.sort()
+
+        def helper(start_index, current_combination, remaining_target):
+
+
+            if remaining_target == 0:
+                #append copy of current combination to the result
+                result.append(current_combination.copy())
+
+            if remaining_target < 0:
+                #No need to explore the branch further
+                return
+            
+            for i in range(start_index, len(candidates)):
+
+                if i > start_index and candidates[i] == candidates[i-1]:
+                    continue
+
+                current_combination.append(candidates[i])
+                helper(i+1, current_combination, remaining_target-candidates[i])
+                current_combination.pop()
+        helper(0, [], target)
+        return result
