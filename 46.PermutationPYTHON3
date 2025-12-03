@@ -1,0 +1,23 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        result = []
+        used = [False]*len(nums)
+
+        def helper(current_list, used):
+            #Base case
+            if len(current_list) == len(nums):
+                result.append(current_list.copy())
+                return
+            
+            for i in range(len(nums)):
+                if used[i] == False:
+                    #pick number and add it to the current_list
+                    used[i] = True
+                    current_list.append(nums[i])
+
+                    helper(current_list, used)
+                    current_list.pop()
+                    used[i] = False
+
+        helper ([], used)       
+        return result   
