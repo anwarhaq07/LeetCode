@@ -1,0 +1,30 @@
+class Solution:
+    def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        
+        result = []
+        nums.sort()
+        level = 0
+
+        def helper(current_path, used_state):
+
+            if len(current_path) == len(nums):
+                result.append(copy.copy(current_path))
+                return
+
+            for i in range(len(nums)):
+
+                if i > 0:
+                    if nums[i] == nums[i-1] and used_state[i-1] == False:
+                        continue
+                if used_state[i] == False:
+                    current_path.append(nums[i])
+                    used_state[i] = True
+                else:
+                    continue
+                helper(current_path, used_state)
+                used_state[i] = False
+                current_path.pop()
+
+        helper([], [False]*len(nums))
+
+        return result
