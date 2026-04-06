@@ -1,0 +1,25 @@
+class Solution:
+    def multiply(self, num1: str, num2: str) -> str:
+        
+        result = [0] *(len(num1)+len(num2))
+        sum = 0
+        product = ""
+
+        for i in range(len(num1) -1, -1, -1):
+            for j in range(len(num2) -1, -1, -1):
+
+                current_sum = (int(num1[i]) * int(num2[j]))
+                current_sum += result[i+j+1]
+
+                result [i+j+1] = current_sum % 10
+                result[i+j] += current_sum//10
+        i = 0
+        while i < len(result) - 1 and result[i] == 0:
+            i += 1
+        product = ''.join(str(x) for x in result[i:])
+        
+        return product
+
+
+
+
