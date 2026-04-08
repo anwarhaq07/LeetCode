@@ -1,0 +1,28 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        words = s.split()
+        if len(pattern) != len(words):
+            return False
+        
+        my_dict_pattern = {}
+        my_dict_words = {}
+
+        for i in range(len(pattern)):
+            #check word
+            if pattern[i] in my_dict_pattern:
+                if (words[i] == my_dict_pattern[pattern[i]]):
+                    continue
+                else:
+                    return False
+            else:
+                my_dict_pattern[pattern[i]] = words[i]
+        
+            #check patern
+            if words[i] in my_dict_words:
+                if pattern[i] == my_dict_words[words[i]]:
+                    continue
+                else:
+                    return False
+            else: 
+                my_dict_words[words[i]] = pattern[i]
+        return True
