@@ -1,0 +1,13 @@
+class Solution:
+    def convertToTitle(self, columnNumber: int) -> str:
+        result = ""
+        char = ""
+        while columnNumber != 0:
+
+            columnNumber = columnNumber-1
+            remainder = columnNumber % 26
+            char = chr(ord('A') + remainder)
+            columnNumber = columnNumber//26
+
+            result = char +result
+        return result
