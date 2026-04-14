@@ -1,0 +1,31 @@
+
+############ NOT OPTOMAL##################
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        my_dict = {}
+
+        for i in range(len(s)):
+            for j in range((i+1),len(s)):
+                if s[j] == s[i]:
+                    my_dict[s[i]] = 1
+            if s[i] not in my_dict:
+                return i
+        return -1
+
+*********************************************************************************
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        my_dict = {}
+
+        for i in s:
+            if i not in my_dict:
+                my_dict[i] = 1
+            else:
+                my_dict[i] += 1
+        
+        for index in range(len(s)):
+            if my_dict[s[index]] <= 1:
+                return index
+        return -1
