@@ -1,0 +1,29 @@
+class Solution:
+    def toHex(self, num: int) -> str:
+        result = ""
+        if num == 0:
+            return "0"
+        if num < 0:
+            num = num & 0xFFFFFFFF
+        while num:
+
+            hex = num & 0xf
+            if hex == 10:
+                result += 'a'
+            elif hex == 11:
+                result += 'b'
+            elif hex == 12:
+                result += 'c'
+            elif hex == 13:
+                result += 'd'
+            elif hex == 14:
+                result += 'e'
+            elif hex == 15:
+                result += 'f'
+            elif hex <= 9:
+                result += str(hex)
+            num = num >> 4
+
+
+        return result[::-1]
+*************************************************************************
