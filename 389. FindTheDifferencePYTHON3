@@ -1,0 +1,29 @@
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        sorted_s = ''.join(sorted(s))
+        sorted_t = ''.join(sorted(t))
+
+        for i, char in enumerate(s):
+            if sorted_s[i] != sorted_t[i]:
+                return sorted_t[i]
+        
+        return sorted_t[-1]
+*******************************************************************
+
+class Solution:
+    def findTheDifference(self, s: str, t: str) -> str:
+        my_dict = {}
+
+        for i in t:
+            if i not in my_dict:
+                my_dict[i] = 1
+            else:
+                my_dict[i] += 1
+        
+        for i in s:
+            if i in my_dict:
+                my_dict[i] -= 1
+        
+        for i in my_dict:
+            if my_dict[i] >= 1:
+                return i 
