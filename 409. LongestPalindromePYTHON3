@@ -1,0 +1,18 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        my_dict = {}
+        result = 0
+        flag = 0
+
+        for i in s:
+            my_dict[i] = my_dict.get(i,0) + 1
+        
+
+        for i in my_dict:
+            freq = my_dict[i]
+            result += (freq//2)*2
+            
+            if freq%2 == 1 and flag == 0:
+                result += 1
+                flag =1 
+        return result
