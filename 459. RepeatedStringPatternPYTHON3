@@ -1,0 +1,20 @@
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        s_len = len(s)
+
+        i = 0
+        while i < s_len:
+             
+            if i > 0 and s_len % i == 0:
+                valid_len = i
+                j = 0
+                valid_str = ""
+                while j<valid_len:
+                    valid_str += s[j]
+                    j += 1
+                num_s = s_len // valid_len
+                if s == num_s * valid_str:
+                    return True
+            i += 1
+        return False
+*********************************************************************************************************
