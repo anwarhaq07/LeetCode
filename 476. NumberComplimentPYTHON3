@@ -1,0 +1,32 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        n = num
+        n_str = ""
+        result = ""
+        while num:
+            n_str = str(num%2) + n_str
+            num = num//2
+        
+        for i in n_str:
+            if i == "1":
+                result += "0"
+            elif i == "0":
+                result += "1"
+        
+        return (int(result, 2))
+
+****************************************************************************
+
+class Solution:
+    def findComplement(self, num: int) -> int:
+        n = num
+        n_str = ""
+        result = ""
+        while num:
+            if str(num%2) == "1":
+                result = "0" +result
+            else:
+                result = "1"+result
+            num = num//2
+        
+        return (int(result, 2))
