@@ -1,0 +1,40 @@
+class Solution:
+    def licenseKeyFormatting(self, s: str, k: int) -> str:
+        s_len = len(s)-1 
+        count = 0
+        result = ""
+        while s_len>=0:
+            while s_len>=0 and count < k:
+                if s[s_len] != "-":
+                    result = s[s_len] + result
+                    count += 1
+                elif count == k:
+                    break
+                s_len -= 1
+            while s[s_len] == "-" and s_len>=0:
+                s_len -= 1
+            if s_len >= 0 and count == k:
+                result = "-" + result
+                count = 0            
+        return result.upper()
+            
+***************************************************************************
+
+class Solution:
+    def licenseKeyFormatting(self, s: str, k: int) -> str:
+        s_len = len(s)-1 
+        count = 0
+        result = ""
+        while s_len>=0:
+            if s[s_len] != "-":
+                result = s[s_len] + result
+                count += 1
+
+            if count == k:
+                result = "-" + result
+                count = 0
+
+            s_len -= 1
+
+            
+        return result.upper().lstrip("-")
