@@ -1,0 +1,56 @@
+class Solution:
+    def constructRectangle(self, area: int) -> List[int]:
+        sq_root = floor(math.sqrt(area))
+        length = 0
+        width = 0
+        result = []
+        while sq_root>0:
+            if area % sq_root == 0:
+                length = round(sq_root)
+                width = round(area / length)
+
+                if length != 0 and width != 0 and length <= width:
+                    temp = length
+                    length = width
+                    width = temp
+                    break
+            sq_root = sq_root - 1
+        result.append(round(length))
+        result.append(round(width))
+        return result
+************************************************************************************************
+
+class Solution:
+    def constructRectangle(self, area: int) -> List[int]:
+        sq_root = floor(math.sqrt(area))
+        length = 0
+        width = 0
+        result = []
+        while sq_root>0:
+            if area % sq_root == 0:
+                length = round(sq_root)
+                width = round(area / length)
+                temp = length
+                length = width
+                width = temp
+                break
+            sq_root = sq_root - 1
+        result.append(round(length))
+        result.append(round(width))
+        return result
+*************************************************************************************************
+class Solution:
+    def constructRectangle(self, area: int) -> List[int]:
+        sq_root = floor(math.sqrt(area))
+        length = 0
+        width = 0
+        while sq_root>0:
+            if area % sq_root == 0:
+                length = sq_root
+                width = area // length
+                temp = length
+                length = width
+                width = temp
+                break
+            sq_root = sq_root - 1
+        return [length, width]
