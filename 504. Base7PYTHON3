@@ -1,0 +1,44 @@
+class Solution:
+    def convertToBase7(self, num: int) -> str:
+        result = []
+        res = ""
+        flag =0
+        if num == 0:
+            return "0"
+        if num < 0:
+            num = abs(num)
+            flag = 1
+        while num:
+            result.append(str(num%7))
+            num = num//7
+            
+        length = len(result)-1
+        while length >= 0:
+            res += result[length]
+            length -= 1
+
+        if flag == 1:
+            res = "-" +res
+
+        return res
+**************************************************************************************
+class Solution:
+    def convertToBase7(self, num: int) -> str:
+        result = []
+        res = ""
+        flag =0
+        if num == 0:
+            return "0"
+        if num < 0:
+            num = abs(num)
+            flag = 1
+        while num:
+            result.append(str(num%7))
+            num = num//7
+            
+        length = len(result)-1
+        res = "".join(result[::-1])
+        if flag == 1:
+            res = "-" +res
+
+        return res
